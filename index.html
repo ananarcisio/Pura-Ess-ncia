@@ -1,0 +1,390 @@
+<html lang="pt-BR" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pura Essência | Cosméticos Naturais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fdf8f6',
+                            100: '#f2e8e5',
+                            200: '#eaddd7',
+                            300: '#e0cec7',
+                            400: '#d2bab0',
+                            500: '#a37c6e',
+                            600: '#8c6253',
+                            900: '#4a332a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+</head>
+<body class="antialiased font-sans flex flex-col min-h-screen">
+
+    <div id="toast-container" class="fixed top-24 right-4 z-50 flex flex-col gap-2"></div>
+    <nav class="glass-nav fixed w-full top-0 z-40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+
+                <div class="flex items-center md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-brand-900 hover:text-brand-600 focus:outline-none">
+                        <i class="ph ph-list text-3xl"></i>
+                    </button>
+                </div>
+
+                <div class="flex-shrink-0 flex items-center justify-center md:justify-start w-full md:w-auto">
+                    <a href="#" class="font-serif text-2xl md:text-3xl font-semibold tracking-wide text-brand-900">
+                        Pura Essência.
+                    </a>
+                </div>
+
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#inicio" class="text-sm uppercase tracking-widest text-brand-600 hover:text-brand-900 transition-colors">Início</a>
+                    <a href="#produtos" class="text-sm uppercase tracking-widest text-brand-600 hover:text-brand-900 transition-colors">Produtos</a>
+                    <a href="#contato" class="text-sm uppercase tracking-widest text-brand-600 hover:text-brand-900 transition-colors">Contato</a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-6">
+                    <button onclick="openModal('login-modal')" class="text-sm uppercase tracking-widest text-brand-600 hover:text-brand-900 transition-colors flex items-center gap-2">
+                        <i class="ph ph-user text-xl"></i>
+                        <span>Entrar</span>
+                    </button>
+                    <button onclick="showToast('Carrinho vazio. Adicione produtos para continuar.', 'info')" class="text-brand-900 hover:text-brand-600 relative">
+                        <i class="ph ph-shopping-bag text-2xl"></i>
+                        <span class="absolute -top-1 -right-2 bg-brand-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-50 border-t border-brand-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
+                <a href="#inicio" onclick="toggleMobileMenu()" class="block px-3 py-2 text-base font-medium text-brand-900">Início</a>
+                <a href="#produtos" onclick="toggleMobileMenu()" class="block px-3 py-2 text-base font-medium text-brand-900">Produtos</a>
+                <a href="#contato" onclick="toggleMobileMenu()" class="block px-3 py-2 text-base font-medium text-brand-900">Contato</a>
+                <button onclick="toggleMobileMenu(); openModal('login-modal')" class="block px-3 py-2 text-base font-medium text-brand-900">Entrar / Cadastrar</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+        
+        <section id="inicio" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-brand-100 to-brand-50 opacity-50"></div>
+                <div class="absolute top-[-10%] right-[-5%] w-96 h-96 bg-brand-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse"></div>
+                <div class="absolute bottom-[-10%] left-[-5%] w-72 h-72 bg-[#f0d8d0] rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <h1 class="font-serif text-5xl md:text-7xl text-brand-900 mb-6">
+                    Sua beleza,<br> <span class="italic text-brand-500">sua essência.</span>
+                </h1>
+                <p class="mt-4 text-lg md:text-xl text-brand-600 max-w-2xl mx-auto font-light mb-10">
+                    Cosméticos naturais e maquiagens premium formulados para realçar o que você tem de melhor. Cuide-se com a pureza que a sua pele merece.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#produtos" class="px-8 py-4 bg-brand-900 text-brand-50 rounded-full uppercase tracking-widest text-sm hover:bg-brand-600 transition-all shadow-lg hover:shadow-xl">
+                        Ver Coleção
+                    </a>
+                    <button onclick="openModal('sobre-modal')" class="px-8 py-4 bg-transparent border border-brand-900 text-brand-900 rounded-full uppercase tracking-widest text-sm hover:bg-brand-100 transition-all">
+                        Nossa História
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="produtos" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="font-serif text-3xl md:text-4xl text-brand-900 mb-4">Mais Vendidos</h2>
+                    <div class="w-24 h-1 bg-brand-300 mx-auto"></div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+
+                    <div class="product-card group flex flex-col">
+                        <div class="relative bg-brand-50 rounded-2xl overflow-hidden aspect-[4/5] mb-4 flex items-center justify-center">
+      
+                            <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&amp;w=400&amp;auto=format&amp;fit=crop" alt="Água Fresca" onerror="this.onerror=null; this.src='https://placehold.co/400x500/f2e8e5/4a332a?text=Agua+Fresca'" class="product-img w-full h-full object-cover">
+                            <button onclick="addToCart('Água Fresca', 'R$ 129,90')" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-brand-900 text-white px-6 py-3 rounded-full text-sm uppercase tracking-wider whitespace-nowrap shadow-lg">
+                                Adicionar
+                            </button>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="font-serif text-xl text-brand-900">Água Fresca</h3>
+                            <p class="text-brand-500 text-sm mb-2">Perfume Corporal Leve</p>
+                            <p class="text-brand-900 font-semibold">R$ 129,90</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card group flex flex-col">
+                        <div class="relative bg-brand-50 rounded-2xl overflow-hidden aspect-[4/5] mb-4 flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&amp;w=400&amp;auto=format&amp;fit=crop" alt="Sérum Anti-idade" onerror="this.onerror=null; this.src='https://placehold.co/400x500/f2e8e5/4a332a?text=Sérum+Anti-Idade'" class="product-img w-full h-full object-cover">
+                            <button onclick="addToCart('Sérum Anti-idade', 'R$ 189,90')" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-brand-900 text-white px-6 py-3 rounded-full text-sm uppercase tracking-wider whitespace-nowrap shadow-lg">
+                                Adicionar
+                            </button>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="font-serif text-xl text-brand-900">Sérum Anti-idade</h3>
+                            <p class="text-brand-500 text-sm mb-2">Renovação Celular</p>
+                            <p class="text-brand-900 font-semibold">R$ 189,90</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card group flex flex-col">
+                        <div class="relative bg-brand-50 rounded-2xl overflow-hidden aspect-[4/5] mb-4 flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1631214500115-598fc2cb8d2d?q=80&amp;w=400&amp;auto=format&amp;fit=crop" alt="Base Líquida" onerror="this.onerror=null; this.src='https://placehold.co/400x500/f2e8e5/4a332a?text=Base+Líquida'" class="product-img w-full h-full object-cover">
+                            <button onclick="addToCart('Base Líquida', 'R$ 89,90')" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-brand-900 text-white px-6 py-3 rounded-full text-sm uppercase tracking-wider whitespace-nowrap shadow-lg">
+                                Adicionar
+                            </button>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="font-serif text-xl text-brand-900">Base Líquida Natural</h3>
+                            <p class="text-brand-500 text-sm mb-2">Cobertura Leve e Radiante</p>
+                            <p class="text-brand-900 font-semibold">R$ 89,90</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card group flex flex-col">
+                        <div class="relative bg-brand-50 rounded-2xl overflow-hidden aspect-[4/5] mb-4 flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&amp;w=400&amp;auto=format&amp;fit=crop" alt="Blush Bastão" onerror="this.onerror=null; this.src='https://placehold.co/400x500/f2e8e5/4a332a?text=Blush+Bastão'" class="product-img w-full h-full object-cover">
+                            <button onclick="addToCart('Blush Bastão', 'R$ 69,90')" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-brand-900 text-white px-6 py-3 rounded-full text-sm uppercase tracking-wider whitespace-nowrap shadow-lg">
+                                Adicionar
+                            </button>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="font-serif text-xl text-brand-900">Blush em Bastão</h3>
+                            <p class="text-brand-500 text-sm mb-2">Efeito Coradinho</p>
+                            <p class="text-brand-900 font-semibold">R$ 69,90</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card group flex flex-col">
+                        <div class="relative bg-brand-50 rounded-2xl overflow-hidden aspect-[4/5] mb-4 flex items-center justify-center">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzxkI8Z_UsMATWFplwYl7QSLBFmycy3oJyNEKyEoXoRA&s=10" alt="Condicionador" onerror="this.onerror=null; this.src='https://placehold.co/400x500/f2e8e5/4a332a?text=Condicionador'" class="product-img w-full h-full object-cover">
+                            <button onclick="addToCart('Condicionador', 'R$ 55,00')" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-brand-900 text-white px-6 py-3 rounded-full text-sm uppercase tracking-wider whitespace-nowrap shadow-lg">
+                                Adicionar
+                            </button>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="font-serif text-xl text-brand-900">Condicionador Nutritivo</h3>
+                            <p class="text-brand-500 text-sm mb-2">Óleos Essenciais</p>
+                            <p class="text-brand-900 font-semibold">R$ 55,00</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card group flex flex-col">
+                        <div class="relative bg-brand-50 rounded-2xl overflow-hidden aspect-[4/5] mb-4 flex items-center justify-center">
+                            <img src="https://i3-imagens-prd.araujo.com.br/redimensionada/600x600/108980/212263_0042882100676_1.webp" alt="Creme Corporal" onerror="this.onerror=null; this.src='https://placehold.co/400x500/f2e8e5/4a332a?text=Creme+Corporal'" class="product-img w-full h-full object-cover">
+                            <button onclick="addToCart('Creme Corporal', 'R$ 79,90')" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-brand-900 text-white px-6 py-3 rounded-full text-sm uppercase tracking-wider whitespace-nowrap shadow-lg">
+                                Adicionar
+                            </button>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="font-serif text-xl text-brand-900">Creme Corporal</h3>
+                            <p class="text-brand-500 text-sm mb-2">Hidratação Intensa 48h</p>
+                            <p class="text-brand-900 font-semibold">R$ 79,90</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-brand-100 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Ingredientes Naturais" onerror="this.onerror=null; this.src='https://placehold.co/600x600/e0cec7/4a332a?text=Textura+Dourada'" class="rounded-t-full w-full h-auto shadow-2xl">
+                </div>
+                <div class="w-full md:w-1/2 text-center md:text-left">
+                    <h2 class="font-serif text-3xl md:text-5xl text-brand-900 mb-6">Poder da Natureza.</h2>
+                    <p class="text-brand-600 mb-8 leading-relaxed text-lg">
+                        Nossos produtos são desenvolvidos com ingredientes 100% orgânicos, cruelty-free e veganos. Acreditamos que a verdadeira beleza nasce do cuidado genuíno com o seu corpo e com o planeta.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center justify-center md:justify-start gap-3 text-brand-900">
+                            <i class="ph-fill ph-leaf text-brand-500 text-xl"></i> 100% Vegano
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start gap-3 text-brand-900">
+                            <i class="ph-fill ph-paw-print text-brand-500 text-xl"></i> Cruelty Free
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start gap-3 text-brand-900">
+                            <i class="ph-fill ph-drop text-brand-500 text-xl"></i> Fórmulas Limpas
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="py-20 bg-white">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="font-serif text-3xl md:text-4xl text-brand-900 mb-4">Fale Conosco</h2>
+                    <p class="text-brand-600">Dúvidas sobre produtos, pedidos ou parcerias? Envie uma mensagem.</p>
+                </div>
+
+                <form onsubmit="handleContact(event)" class="space-y-6 bg-brand-50 p-8 md:p-10 rounded-3xl shadow-sm border border-brand-100">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="nome" class="block text-sm font-medium text-brand-900 mb-2">Nome Completo</label>
+                            <input type="text" id="nome" required="" class="w-full px-4 py-3 rounded-xl border-brand-200 bg-white focus:ring-2 focus:ring-brand-400 focus:border-brand-400 outline-none transition-all" placeholder="Seu nome">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-brand-900 mb-2">E-mail</label>
+                            <input type="email" id="email" required="" class="w-full px-4 py-3 rounded-xl border-brand-200 bg-white focus:ring-2 focus:ring-brand-400 focus:border-brand-400 outline-none transition-all" placeholder="seu@email.com">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="assunto" class="block text-sm font-medium text-brand-900 mb-2">Assunto</label>
+                        <select id="assunto" class="w-full px-4 py-3 rounded-xl border-brand-200 bg-white focus:ring-2 focus:ring-brand-400 focus:border-brand-400 outline-none transition-all text-brand-900">
+                            <option>Dúvida sobre produto</option>
+                            <option>Status do meu pedido</option>
+                            <option>Sugestão/Elogio</option>
+                            <option>Outros</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="mensagem" class="block text-sm font-medium text-brand-900 mb-2">Mensagem</label>
+                        <textarea id="mensagem" rows="4" required="" class="w-full px-4 py-3 rounded-xl border-brand-200 bg-white focus:ring-2 focus:ring-brand-400 focus:border-brand-400 outline-none transition-all resize-none" placeholder="Escreva sua mensagem aqui..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-brand-900 text-brand-50 rounded-xl uppercase tracking-widest text-sm hover:bg-brand-600 transition-all shadow-md font-medium">
+                        Enviar Mensagem
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-brand-900 text-brand-100 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
+                <div>
+                    <h3 class="font-serif text-2xl font-semibold mb-4 text-white">Pura Essência.</h3>
+                    <p class="text-brand-300 text-sm leading-relaxed mb-6">
+                        Despertando a sua beleza natural através de cosméticos limpos, eficazes e sustentáveis.
+                    </p>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-brand-600 flex items-center justify-center hover:bg-brand-500 transition-colors">
+                            <i class="ph ph-instagram-logo text-xl"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-brand-600 flex items-center justify-center hover:bg-brand-500 transition-colors">
+                            <i class="ph ph-facebook-logo text-xl"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-brand-600 flex items-center justify-center hover:bg-brand-500 transition-colors">
+                            <i class="ph ph-tiktok-logo text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white uppercase tracking-widest text-sm font-semibold mb-6">Navegação</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#inicio" class="hover:text-white transition-colors">Início</a></li>
+                        <li><a href="#produtos" class="hover:text-white transition-colors">Produtos</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Sobre Nós</a></li>
+                        <li><a href="#contato" class="hover:text-white transition-colors">Contato</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white uppercase tracking-widest text-sm font-semibold mb-6">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white transition-colors">Termos de Serviço</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Política de Privacidade</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Trocas e Devoluções</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-brand-600 pt-8 text-center text-sm text-brand-400">
+                <p>© 2025 Pura Essência Cosméticos. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="login-modal" class="fixed inset-0 z-50 hidden bg-brand-900/40 backdrop-blur-sm items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300" id="login-modal-content">
+            
+            <div class="relative bg-brand-100 p-8 text-center border-b border-brand-200">
+                <button onclick="closeModal('login-modal')" class="absolute top-4 right-4 text-brand-600 hover:text-brand-900">
+                    <i class="ph ph-x text-2xl"></i>
+                </button>
+                <h3 class="font-serif text-2xl text-brand-900 mb-2" id="auth-title">Bem-vinda de volta</h3>
+                <p class="text-brand-600 text-sm" id="auth-subtitle">Acesse sua conta para continuar.</p>
+            </div>
+
+            <div class="p-8 no-scrollbar max-h-[60vh] overflow-y-auto">
+
+                <form id="form-login" onsubmit="handleLogin(event)" class="space-y-5 block">
+                    <div>
+                        <label class="block text-sm font-medium text-brand-900 mb-1">E-mail</label>
+                        <input type="email" required="" class="w-full px-4 py-3 rounded-xl border border-brand-200 bg-brand-50 focus:ring-2 focus:ring-brand-400 focus:border-brand-400 outline-none transition-all" placeholder="Seu e-mail">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-brand-900 mb-1">Senha</label>
+                        <input type="password" required="" class="w-full px-4 py-3 rounded-xl border border-brand-200 bg-brand-50 focus:ring-2 focus:ring-brand-400 focus:border-brand-400 outline-none transition-all" placeholder="••••••••">
+                    </div>
+                    <div class="flex justify-end">
+                        <a href="#" class="text-sm text-brand-500 hover:text-brand-900">Esqueceu a senha?</a>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-brand-900 text-brand-50 rounded-xl uppercase tracking-widest text-sm hover:bg-brand-600 transition-all font-medium">
+                        Entrar
+                    </button>
+                    <p class="text-center text-sm text-brand-600 mt-4">
+                        Ainda não tem conta? <button type="button" onclick="toggleAuthMode('cadastro')" class="text-brand-900 font-semibold hover:underline">Cadastre-se</button>
+                    </p>
+                </form>
+
+                <form id="form-cadastro" onsubmit="handleRegister(event)" class="space-y-5 hidden">
+                    <div>
+                        <label class="block text-sm font-medium text-brand-900 mb-1">Nome Completo</label>
+                        <input type="text" required="" class="w-full px-4 py-3 rounded-xl border border-brand-200 bg-brand-50 focus:ring-2 focus:ring-brand-400 focus:border-brand-400 outline-none transition-all" placeholder="Como devemos te chamar?">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-brand-900 mb-1">E-mail</label>
+                        <input type="email" required="" class="w-full px-4 py-3 rounded-xl border border-brand-200 bg-brand-50 focus:ring-2 focus:ring-brand-400 focus:border-brand-400 outline-none transition-all" placeholder="Seu melhor e-mail">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-brand-900 mb-1">Senha</label>
+                        <input type="password" required="" class="w-full px-4 py-3 rounded-xl border border-brand-200 bg-brand-50 focus:ring-2 focus:ring-brand-400 focus:border-brand-400 outline-none transition-all" placeholder="Crie uma senha forte">
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-brand-900 text-brand-50 rounded-xl uppercase tracking-widest text-sm hover:bg-brand-600 transition-all font-medium">
+                        Criar Conta
+                    </button>
+                    <p class="text-center text-sm text-brand-600 mt-4">
+                        Já possui conta? <button type="button" onclick="toggleAuthMode('login')" class="text-brand-900 font-semibold hover:underline">Fazer Login</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
