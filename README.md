@@ -71,4 +71,4 @@ Funcionalidades planejadas para as próximas versões do projeto:
 
 ---
 
-Desenvolvido por [Ana Narcísio](https://github.com/ana-narcisio) para o portfólio.
+Desenvolvido por [Ana Narcísio](https://github.com/ananarcisio) para o portfólio.
