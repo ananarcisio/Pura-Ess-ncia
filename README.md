@@ -1,7 +1,5 @@
 # 🌿 Pura Essência | Cosméticos Naturais
 
-> **Uma interface elegante, moderna e responsiva para um e-commerce premium de cosméticos naturais, veganos e cruelty-free.**
-
 O **Pura Essência** é um projeto de front-end focado na excelência de **UX (User Experience) e UI (User Interface)**. Ele unifica a experiência de compra em uma **Single Page Application (SPA)** leve e de alta performance, utilizando janelas modais fluidas e navegação com rolagem suave (*smooth scroll*) para manter o usuário sempre imerso no contexto da marca. Desenvolvido em prol da disciplina de Front-End.
 
 ---
